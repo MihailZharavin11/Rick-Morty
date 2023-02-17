@@ -2,7 +2,7 @@ import { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   schema: "https://rickandmortyapi.com/graphql",
-  documents: ["src/**/*.tsx"],
+  documents: ["src/**/*.ts"],
   generates: {
     "./src/generated/": {
       preset: "client",

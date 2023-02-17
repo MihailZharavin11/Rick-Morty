@@ -6,27 +6,35 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import React from "react";
 
-export const Character = () => {
+type CharacterProps = {
+  name: string;
+  image: string;
+  id: string;
+  created: string;
+};
+
+export const Character: React.FC<CharacterProps> = ({
+  name,
+  image,
+  id,
+  created,
+}) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 300 }}
-        image="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-        title="Rick"
-      />
+    <Card sx={{ maxWidth: 345, margin: "0 auto" }}>
+      <CardMedia sx={{ height: 300 }} image={image} title={name} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {created}
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: "end" }}>
-        <Button size="small">Learn More</Button>
+        <Button variant="outlined" size="medium">
+          Learn More
+        </Button>
       </CardActions>
     </Card>
   );
