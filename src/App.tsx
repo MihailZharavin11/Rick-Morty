@@ -1,11 +1,19 @@
 import React from "react";
-import logo from "./logo.svg";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { useQuery } from "@apollo/client";
-import { gql } from "./generated/gql";
+import { Characters } from "./components/Characters";
+import { Layout } from "./Layout";
 
 const App = () => {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Characters />} />
+        </Route>
+      </Routes>
+    </div>
+  );
 };
 
 export default App;
