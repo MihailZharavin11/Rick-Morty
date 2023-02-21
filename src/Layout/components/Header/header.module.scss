@@ -1,0 +1,20 @@
+.boxInput {
+  position: relative;
+  overflow: hidden;
+}
+
+.input {
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  width: 300px;
+
+  &.active {
+    transition: all 1s ease;
+    transform: translateX(0px);
+  }
+  &.disable {
+    transform: translateX(-500px);
+    transition: all 1s ease;
+  }
+}
