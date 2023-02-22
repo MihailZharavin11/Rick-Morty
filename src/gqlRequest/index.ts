@@ -1,8 +1,8 @@
 import { gql } from "../generated/gql";
 
 export const GET_ALL_CHARACTERS = gql(`
-  query GetAllCharacters($page: Int) {
-    characters(page: $page) {
+  query GetAllCharacters($page: Int,$filter: FilterCharacter) {
+    characters(page: $page,filter: $filter) {
       results {
         image
         name

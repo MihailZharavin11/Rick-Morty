@@ -1,8 +1,9 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { CharacterItem } from "./components/CharacterItem";
 import { Characters } from "./components/Characters";
+import { SearchValueContext } from "./Context/SearchValueContext";
 import { Layout } from "./Layout";
 
 const App = () => {
@@ -10,12 +11,14 @@ const App = () => {
 
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Characters />} />
-          <Route path="/character/:id" element={<CharacterItem />} />
-        </Route>
-      </Routes>
+      <SearchValueContext.Provider value={{ searchValue, setSearchValue }}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Characters />} />
+            <Route path="/character/:id" element={<CharacterItem />} />
+          </Route>
+        </Routes>
+      </SearchValueContext.Provider>
     </div>
   );
 };

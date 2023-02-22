@@ -1,16 +1,21 @@
 import { useQuery } from "@apollo/client";
 import { Container, Grid, Pagination } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import { SearchValueContext } from "../../Context/SearchValueContext";
 import { GET_ALL_CHARACTERS } from "../../gqlRequest";
 import { CharacterCard } from "../CharacterCard";
 
 export const Characters = () => {
   const initialPage = Number(sessionStorage.getItem("page")) || 1;
   const [currentPage, setCurrentPage] = useState(initialPage);
+  const { searchValue } = useContext(SearchValueContext);
 
-  const { data, loading, error } = useQuery(GET_ALL_CHARACTERS, {
+  const { data, loading } = useQuery(GET_ALL_CHARACTERS, {
     variables: {
       page: currentPage,
+      filter: {
+        name: searchValue,
+      },
     },
   });
 

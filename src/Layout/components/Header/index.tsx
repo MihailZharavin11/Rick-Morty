@@ -13,17 +13,20 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link, useLocation } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
 import styles from "./header.module.scss";
 import classnames from "classnames";
+import { SearchValueContext } from "../../../Context/SearchValueContext";
 
 export const Header = () => {
+  const [inputValue, setInputValue] = useState("");
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);
+  const { setSearchValue } = useContext(SearchValueContext);
   const { pathname } = useLocation();
 
   const list = () => (
@@ -81,8 +84,20 @@ export const Header = () => {
                 inputProps={{
                   "aria-label": "Searching for a character by name",
                 }}
+                value={inputValue}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setInputValue(event.target.value);
+                }}
               />
-              <IconButton type="button" sx={{ p: "5px" }} aria-label="search">
+              <IconButton
+                onClick={() => {
+                  setSearchValue(inputValue);
+                  setInputValue("");
+                }}
+                type="button"
+                sx={{ p: "5px" }}
+                aria-label="search"
+              >
                 <SearchIcon />
               </IconButton>
             </Paper>
