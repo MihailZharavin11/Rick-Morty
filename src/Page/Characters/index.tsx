@@ -3,8 +3,8 @@ import { Container, Grid, Pagination } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { SearchValueContext } from "../../Context/SearchValueContext";
 import { GET_ALL_CHARACTERS } from "../../gqlRequest";
-import { CharacterCard } from "../CharacterCard";
-import { Spinner } from "../Spinner";
+import { CharacterCard } from "../../components/CharacterCard";
+import { Spinner } from "../../components/Spinner";
 
 export const Characters = () => {
   const initialPage = Number(sessionStorage.getItem("page")) || 1;

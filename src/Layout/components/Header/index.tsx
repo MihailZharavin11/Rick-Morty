@@ -32,11 +32,13 @@ export const Header = () => {
   const list = () => (
     <Box sx={{ width: 250 }} role="presentation">
       <List>
-        <ListItem disablePadding>
-          <ListItemButton component={Link} to="/settings">
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
+        <ListItem>
+          <ListItemButton component={Link} to="/">
+            <ListItemText primary="All Characters" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton component={Link} to="/episodes">
             <ListItemText primary="Settings" />
           </ListItemButton>
         </ListItem>

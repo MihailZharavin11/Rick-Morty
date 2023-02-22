@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { CharacterItem } from "./components/CharacterItem";
-import { Characters } from "./components/Characters";
+import { Characters } from "./Page/Characters";
 import { SearchValueContext } from "./Context/SearchValueContext";
 import { Layout } from "./Layout";
+import { Episodes } from "./Page/Episodes";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Characters />} />
             <Route path="/character/:id" element={<CharacterItem />} />
+            <Route path="/episodes" element={<Episodes />} />
           </Route>
         </Routes>
       </SearchValueContext.Provider>

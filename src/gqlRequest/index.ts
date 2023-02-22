@@ -35,3 +35,23 @@ export const GET_CHARACTER = gql(`
     }
   }
 `);
+
+export const GET_ALL_EPISODES = gql(`
+  query Characters {
+    episodes {
+      results {
+        name
+        id
+        episode
+        created
+        characters {
+          id
+          name
+        }
+      }
+      info {
+        pages
+      }
+    }
+  }
+`);
