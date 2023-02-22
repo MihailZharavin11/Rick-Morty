@@ -4,6 +4,7 @@ import React, { useContext, useState } from "react";
 import { SearchValueContext } from "../../Context/SearchValueContext";
 import { GET_ALL_CHARACTERS } from "../../gqlRequest";
 import { CharacterCard } from "../CharacterCard";
+import { Spinner } from "../Spinner";
 
 export const Characters = () => {
   const initialPage = Number(sessionStorage.getItem("page")) || 1;
@@ -20,7 +21,7 @@ export const Characters = () => {
   });
 
   if (loading) {
-    return <>Loading...</>;
+    return <Spinner />;
   }
 
   return (
