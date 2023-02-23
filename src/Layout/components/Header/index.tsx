@@ -3,30 +3,22 @@ import {
   Box,
   Drawer,
   IconButton,
-  InputBase,
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
-  Paper,
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link, useLocation } from "react-router-dom";
-import SettingsIcon from "@mui/icons-material/Settings";
-import SearchIcon from "@mui/icons-material/Search";
+
 import styles from "./header.module.scss";
-import classnames from "classnames";
-import { SearchValueContext } from "../../../Context/SearchValueContext";
 
 export const Header = () => {
   const [inputValue, setInputValue] = useState("");
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const [isSearchOpen, setSearchOpen] = useState(false);
-  const { setSearchValue } = useContext(SearchValueContext);
   const { pathname } = useLocation();
 
   const list = () => (
@@ -39,7 +31,7 @@ export const Header = () => {
         </ListItem>
         <ListItem>
           <ListItemButton component={Link} to="/episodes">
-            <ListItemText primary="Settings" />
+            <ListItemText primary="Episodes" />
           </ListItemButton>
         </ListItem>
       </List>
@@ -60,50 +52,8 @@ export const Header = () => {
           >
             <MenuIcon />
           </IconButton>
-          {pathname === "/" && (
-            <IconButton
-              size="large"
-              edge="start"
-              aria-label="search"
-              color="inherit"
-              onClick={() => setSearchOpen(!isSearchOpen)}
-            >
-              <SearchIcon />
-            </IconButton>
-          )}
 
-          <Box marginLeft={1} className={styles.boxInput}>
-            <Paper
-              component="form"
-              className={classnames(styles.input, {
-                [styles.active]: isSearchOpen,
-                [styles.disable]: !isSearchOpen,
-              })}
-            >
-              <InputBase
-                sx={{ ml: 1, flex: 1 }}
-                placeholder="Searching for a character"
-                inputProps={{
-                  "aria-label": "Searching for a character by name",
-                }}
-                value={inputValue}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setInputValue(event.target.value);
-                }}
-              />
-              <IconButton
-                onClick={() => {
-                  setSearchValue(inputValue);
-                  setInputValue("");
-                }}
-                type="button"
-                sx={{ p: "5px" }}
-                aria-label="search"
-              >
-                <SearchIcon />
-              </IconButton>
-            </Paper>
-          </Box>
+          <Box marginLeft={1} className={styles.boxInput}></Box>
 
           <Typography
             variant="h6"
