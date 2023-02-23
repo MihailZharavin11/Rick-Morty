@@ -65,6 +65,10 @@ export const Episodes = () => {
     },
   ];
 
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <div style={{ height: 370, width: "100%" }}>
       <Box marginLeft={3} marginTop={2} marginBottom={2}>
