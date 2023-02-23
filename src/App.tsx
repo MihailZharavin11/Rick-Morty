@@ -6,6 +6,7 @@ import { Characters } from "./Page/Characters";
 import { SearchValueContext } from "./Context/SearchValueContext";
 import { Layout } from "./Layout";
 import { Episodes } from "./Page/Episodes";
+import { Episode } from "./Page/Episode";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -18,6 +19,7 @@ const App = () => {
             <Route index element={<Characters />} />
             <Route path="/character/:id" element={<CharacterItem />} />
             <Route path="/episodes" element={<Episodes />} />
+            <Route path="/episode/:id" element={<Episode />} />
           </Route>
         </Routes>
       </SearchValueContext.Provider>

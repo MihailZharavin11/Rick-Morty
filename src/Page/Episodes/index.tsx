@@ -44,7 +44,7 @@ export const Episodes = () => {
         <Link
           underline={"none"}
           component={RouterLink}
-          to={`/episodes/${params.id}`}
+          to={`/episode/${params.id}`}
         >
           {params.value}
         </Link>
