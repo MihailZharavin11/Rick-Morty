@@ -7,7 +7,7 @@ import { Spinner } from "../../components/Spinner";
 import { InputPlace } from "../../components/InputPlace";
 
 export const Characters = () => {
-  const initialPage = Number(sessionStorage.getItem("page")) || 1;
+  const initialPage = Number(sessionStorage.getItem("charactersPage")) || 1;
   const [inputValue, setInputValue] = useState("");
   const [currentPage, setCurrentPage] = useState(initialPage);
 
@@ -44,7 +44,7 @@ export const Characters = () => {
   return (
     <Container maxWidth="xl">
       <Grid container padding={2} spacing={2}>
-        <Grid item display={"flex"} justifyContent={"center"} xs={12}>
+        <Grid item display={"flex"} xs={12}>
           <InputPlace
             clickOnClear={getDefaultData}
             clickOnSearch={getDataBySearch}
@@ -69,7 +69,7 @@ export const Characters = () => {
             page={currentPage}
             onChange={(_, page) => {
               setCurrentPage(page);
-              sessionStorage.setItem("page", page.toString());
+              sessionStorage.setItem("charactersPage", page.toString());
             }}
             count={data?.characters?.info?.pages || 1}
           />

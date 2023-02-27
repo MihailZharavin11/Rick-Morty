@@ -37,7 +37,7 @@ export const GET_CHARACTER = gql(`
 `);
 
 export const GET_ALL_EPISODES = gql(`
-  query Characters($filter: FilterEpisode, $page: Int) {
+  query GetAllEpisodes($filter: FilterEpisode, $page: Int) {
     episodes(filter: $filter, page: $page) {
       results {
         name
@@ -54,4 +54,20 @@ export const GET_ALL_EPISODES = gql(`
       }
     }
   }
+`);
+
+export const GET_EPISODE = gql(`
+query GetEpisode($episodeId: ID!) {
+  episode(id: $episodeId) {
+    air_date
+    characters {
+      name
+      id
+    }
+    created
+    episode
+    id
+    name
+  }
+}
 `);

@@ -8,8 +8,9 @@ import { Spinner } from "../../components/Spinner";
 import { InputPlace } from "../../components/InputPlace";
 
 export const Episodes = () => {
+  const initialPage = Number(sessionStorage.getItem("episodesPage")) || 1;
   const [inputValue, setInputValue] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(initialPage);
   const { data, refetch, loading } = useQuery(GET_ALL_EPISODES, {
     variables: {
       page: currentPage,
@@ -93,7 +94,15 @@ export const Episodes = () => {
           setInputValue={setInputValue}
         />
       </Box>
-      <DataGrid rows={rowsData || []} columns={columns} pageSize={5} />
+      <Box height={"70vh"}>
+        <DataGrid
+          autoHeight
+          rows={rowsData || []}
+          columns={columns}
+          pageSize={5}
+        />
+      </Box>
+
       <Box marginLeft={3} marginTop={2}>
         <Typography>Страница эпизодов: {currentPage}</Typography>
         <Pagination
@@ -101,6 +110,7 @@ export const Episodes = () => {
           page={currentPage}
           onChange={(_, page) => {
             setCurrentPage(page);
+            sessionStorage.setItem("episodesPage", page.toString());
           }}
           count={data?.episodes?.info?.pages || 1}
         />
