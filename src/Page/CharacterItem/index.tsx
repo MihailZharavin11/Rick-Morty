@@ -3,7 +3,7 @@ import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { GET_CHARACTER } from "../../gqlRequest";
-import { Spinner } from "../Spinner";
+import { Spinner } from "../../components/Spinner";
 
 export const CharacterItem = () => {
   const gridBoxValue = {

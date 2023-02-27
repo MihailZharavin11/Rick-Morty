@@ -1,17 +1,10 @@
 import { useQuery } from "@apollo/client";
-import {
-  Container,
-  Grid,
-  IconButton,
-  InputBase,
-  Pagination,
-  Paper,
-} from "@mui/material";
+import { Container, Grid, Pagination } from "@mui/material";
 import React, { useState } from "react";
 import { GET_ALL_CHARACTERS } from "../../gqlRequest";
 import { CharacterCard } from "../../components/CharacterCard";
 import { Spinner } from "../../components/Spinner";
-import SearchIcon from "@mui/icons-material/Search";
+import { InputPlace } from "../../components/InputPlace";
 
 export const Characters = () => {
   const initialPage = Number(sessionStorage.getItem("page")) || 1;
@@ -24,6 +17,26 @@ export const Characters = () => {
     },
   });
 
+  const getDataBySearch = () => {
+    if (inputValue) {
+      refetch({
+        filter: {
+          name: inputValue,
+        },
+      });
+      setInputValue("");
+    }
+  };
+
+  const getDefaultData = () => {
+    refetch({
+      filter: {
+        name: "",
+      },
+    });
+    setInputValue("");
+  };
+
   if (loading) {
     return <Spinner />;
   }
@@ -32,44 +45,12 @@ export const Characters = () => {
     <Container maxWidth="xl">
       <Grid container padding={2} spacing={2}>
         <Grid item display={"flex"} justifyContent={"center"} xs={12}>
-          {" "}
-          <Paper
-            style={{
-              width: "340px",
-              display: "flex",
-            }}
-            component="form"
-          >
-            <InputBase
-              sx={{
-                ml: 1,
-                flex: 1,
-              }}
-              placeholder="Searching for a character"
-              inputProps={{
-                "aria-label": "Searching for a character by name",
-              }}
-              value={inputValue}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setInputValue(event.target.value);
-              }}
-            />
-            <IconButton
-              onClick={() => {
-                refetch({
-                  filter: {
-                    name: inputValue,
-                  },
-                });
-                setInputValue("");
-              }}
-              type="button"
-              sx={{ p: "5px" }}
-              aria-label="search"
-            >
-              <SearchIcon />
-            </IconButton>
-          </Paper>
+          <InputPlace
+            clickOnClear={getDefaultData}
+            clickOnSearch={getDataBySearch}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+          />
         </Grid>
         {data &&
           data.characters?.results?.map((character) => (
