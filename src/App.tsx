@@ -6,6 +6,7 @@ import { Characters } from "./Page/Characters";
 import { Layout } from "./Layout";
 import { Episodes } from "./Page/Episodes";
 import { Episode } from "./Page/Episode";
+import { NotFound } from "./components/NotFound";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/character/:id" element={<CharacterItem />} />
           <Route path="/episodes" element={<Episodes />} />
           <Route path="/episode/:id" element={<Episode />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </div>

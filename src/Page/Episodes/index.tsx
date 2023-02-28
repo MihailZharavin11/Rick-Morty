@@ -6,12 +6,13 @@ import { Box, Link, Pagination, Typography } from "@mui/material";
 import { GET_ALL_EPISODES } from "../../gqlRequest";
 import { Spinner } from "../../components/Spinner";
 import { InputPlace } from "../../components/InputPlace";
+import { Error } from "../../components/Error";
 
 export const Episodes = () => {
   const initialPage = Number(sessionStorage.getItem("episodesPage")) || 1;
   const [inputValue, setInputValue] = useState("");
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const { data, refetch, loading } = useQuery(GET_ALL_EPISODES, {
+  const { data, refetch, loading, error } = useQuery(GET_ALL_EPISODES, {
     variables: {
       page: currentPage,
     },
@@ -82,6 +83,10 @@ export const Episodes = () => {
 
   if (loading) {
     return <Spinner />;
+  }
+
+  if (error) {
+    return <Error />;
   }
 
   return (

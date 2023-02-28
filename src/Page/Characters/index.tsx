@@ -5,13 +5,14 @@ import { GET_ALL_CHARACTERS } from "../../gqlRequest";
 import { CharacterCard } from "../../components/CharacterCard";
 import { Spinner } from "../../components/Spinner";
 import { InputPlace } from "../../components/InputPlace";
+import { Error } from "../../components/Error";
 
 export const Characters = () => {
   const initialPage = Number(sessionStorage.getItem("charactersPage")) || 1;
   const [inputValue, setInputValue] = useState("");
   const [currentPage, setCurrentPage] = useState(initialPage);
 
-  const { data, loading, refetch } = useQuery(GET_ALL_CHARACTERS, {
+  const { data, loading, refetch, error } = useQuery(GET_ALL_CHARACTERS, {
     variables: {
       page: currentPage,
     },
@@ -39,6 +40,10 @@ export const Characters = () => {
 
   if (loading) {
     return <Spinner />;
+  }
+
+  if (error) {
+    return <Error />;
   }
 
   return (

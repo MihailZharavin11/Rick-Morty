@@ -4,6 +4,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { GET_CHARACTER } from "../../gqlRequest";
 import { Spinner } from "../../components/Spinner";
+import { Error } from "../../components/Error";
 
 export const CharacterItem = () => {
   const gridBoxValue = {
@@ -20,6 +21,10 @@ export const CharacterItem = () => {
 
   if (loading) {
     return <Spinner />;
+  }
+
+  if (error) {
+    return <Error />;
   }
 
   return (

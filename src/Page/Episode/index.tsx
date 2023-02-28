@@ -3,32 +3,33 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  IconButton,
   List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { FixedSizeList, ListChildComponentProps } from "react-window";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import classNames from "classnames";
-import styles from "./episode.module.scss";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useQuery } from "@apollo/client";
 import { GET_EPISODE } from "../../gqlRequest";
 import { CharacterListItem } from "../../components/CharacterListItem";
+import { Spinner } from "../../components/Spinner";
+import { Error } from "../../components/Error";
+
 export const Episode = () => {
   const { id } = useParams();
-  const { data, loading } = useQuery(GET_EPISODE, {
+  const { data, loading, error } = useQuery(GET_EPISODE, {
     variables: {
       episodeId: id || "1",
     },
   });
 
-  console.log(data);
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <Box padding={3}>
