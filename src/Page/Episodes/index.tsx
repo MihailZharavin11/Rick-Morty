@@ -10,7 +10,6 @@ import { Error } from "../../components/Error";
 
 export const Episodes = () => {
   const initialPage = Number(sessionStorage.getItem("episodesPage")) || 1;
-  const [inputValue, setInputValue] = useState("");
   const [currentPage, setCurrentPage] = useState(initialPage);
   const { data, refetch, loading, error } = useQuery(GET_ALL_EPISODES, {
     variables: {
@@ -59,7 +58,7 @@ export const Episodes = () => {
     },
   ];
 
-  const getDataBySearch = () => {
+  const getDataBySearch = (inputValue: string) => {
     if (inputValue) {
       refetch({
         page: 1,
@@ -68,7 +67,6 @@ export const Episodes = () => {
         },
       });
       setCurrentPage(1);
-      setInputValue("");
     }
   };
 
@@ -78,7 +76,6 @@ export const Episodes = () => {
         name: "",
       },
     });
-    setInputValue("");
   };
 
   if (loading) {
@@ -95,13 +92,12 @@ export const Episodes = () => {
         <InputPlace
           clickOnClear={getDefaultData}
           clickOnSearch={getDataBySearch}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
         />
       </Box>
       <Box height={"70vh"}>
         <DataGrid
           autoHeight
+          rowsPerPageOptions={[5]}
           rows={rowsData || []}
           columns={columns}
           pageSize={5}

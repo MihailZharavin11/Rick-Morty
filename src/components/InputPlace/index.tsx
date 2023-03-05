@@ -1,24 +1,32 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton, InputBase, Paper } from "@mui/material";
 
 type InputPlaceProps = {
-  inputValue: string;
-  setInputValue: React.Dispatch<React.SetStateAction<string>>;
-  clickOnSearch: () => void;
+  clickOnSearch: (inputValue: string) => void;
   clickOnClear: () => void;
   width?: string;
 };
 
 export const InputPlace: FC<InputPlaceProps> = ({
-  inputValue,
-  setInputValue,
   clickOnClear,
   clickOnSearch,
   width = "340px",
 }) => {
+  const [input, setInput] = useState("");
+
+  const handleSearchButton = () => {
+    clickOnSearch(input);
+    setInput("");
+  };
+
+  const handleClearButton = () => {
+    clickOnClear();
+    setInput("");
+  };
+
   return (
     <Paper
       style={{
@@ -36,13 +44,13 @@ export const InputPlace: FC<InputPlaceProps> = ({
         inputProps={{
           "aria-label": "Search for an episode by name",
         }}
-        value={inputValue}
+        value={input}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setInputValue(event.target.value);
+          setInput(event.target.value);
         }}
       />
       <IconButton
-        onClick={clickOnSearch}
+        onClick={handleSearchButton}
         type="button"
         sx={{ p: "5px" }}
         aria-label="search"
@@ -50,7 +58,7 @@ export const InputPlace: FC<InputPlaceProps> = ({
         <SearchIcon />
       </IconButton>
       <IconButton
-        onClick={clickOnClear}
+        onClick={handleClearButton}
         type="button"
         sx={{ p: "5px" }}
         aria-label="close"

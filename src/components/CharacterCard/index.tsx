@@ -18,7 +18,6 @@ type CharacterProps = {
 
 export const CharacterCard: React.FC<CharacterProps> = React.memo(
   ({ name, image, id, created }) => {
-    console.log("characted card render");
     return (
       <Card sx={{ maxWidth: 345, margin: "0 auto" }}>
         <CardActionArea>

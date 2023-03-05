@@ -9,25 +9,12 @@ import { Error } from "../../components/Error";
 
 export const Characters = () => {
   const initialPage = Number(sessionStorage.getItem("charactersPage")) || 1;
-  const [inputValue, setInputValue] = useState("");
   const [currentPage, setCurrentPage] = useState(initialPage);
-
   const { data, loading, refetch, error } = useQuery(GET_ALL_CHARACTERS, {
     variables: {
       page: currentPage,
     },
   });
-
-  const getDataBySearch = () => {
-    if (inputValue) {
-      refetch({
-        filter: {
-          name: inputValue,
-        },
-      });
-      setInputValue("");
-    }
-  };
 
   const getDefaultData = () => {
     refetch({
@@ -35,7 +22,16 @@ export const Characters = () => {
         name: "",
       },
     });
-    setInputValue("");
+  };
+
+  const getDataBySearch = (inputValue: string) => {
+    if (inputValue) {
+      refetch({
+        filter: {
+          name: inputValue,
+        },
+      });
+    }
   };
 
   if (loading) {
@@ -53,8 +49,6 @@ export const Characters = () => {
           <InputPlace
             clickOnClear={getDefaultData}
             clickOnSearch={getDataBySearch}
-            inputValue={inputValue}
-            setInputValue={setInputValue}
           />
         </Grid>
         {data &&
